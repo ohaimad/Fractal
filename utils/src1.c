@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:27:39 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/23 17:55:25 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/25 20:29:03 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	iteration_julia(float reel, float imag, t_data *img)
 	}
 	if (iter == 100)
 		return (0x0000000);
+	else if (iter == 0)
+		return (ft_colors(img));
 	else
 		return (ft_colors(img) * 100 / iter);
 }
@@ -52,8 +54,8 @@ int	ft_map_jl(int x, int y, t_data *img)
 {
 	if (img->move == 1 && x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
 	{
-		img->cr = to_complexe(x);
-		img->ci = to_complexe(y);
+		img->cr = to_complexe(x, WIDTH, img->r_max, img->r_min);
+		img->ci = to_complexe(y, HEIGHT, img->i_max, img->i_min);
 		julia(img);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:32:09 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/23 18:36:36 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/25 20:38:25 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	ft_init(t_data *img)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	img->coloring = 0;
+	img->r_max = 2;
+    img->r_min = -2;
+    img->i_max = 2;
+    img->i_min = -2;
 }
 
 int	key_shift(int key, t_data *shifting)
@@ -57,23 +61,30 @@ int	key_shift(int key, t_data *shifting)
 			shifting->coloring = 0;
 		else
 			shifting->coloring++;
-		if (shifting->status == 10)
-			julia(shifting);
-		else if (shifting->status == 20)
-			mandelbrot(shifting);
-		else if (shifting->status == 30)
-			tricorn(shifting);
 	}
+	else if (key >= LEFT && key <= UP)
+		ft_arrows_keys(key, shifting);
 	else if (key == SPACE && shifting->status == 10)
 		shifting->move =! shifting->move;
 	else if (key == ESP)
 		ft_exit(shifting);
+	if (shifting->status == 10)
+		julia(shifting);
+	else if (shifting->status == 20)
+		mandelbrot(shifting);
+	else if (shifting->status == 30)
+		tricorn(shifting);
 	return (0);
 }
 
-float	to_complexe(int a)
+double	to_complexe(int pnt, int window, double max, double min)
 {
-	return (((float)(4 * a) / 600) - 2);
+		double x;
+		double res;
+
+		x = (max - min) / window;
+		res = min + (x * pnt);
+		return (res);
 }
 
 int	iteration_mandelbrot(float reel, float imag, t_data *img)
@@ -97,6 +108,8 @@ int	iteration_mandelbrot(float reel, float imag, t_data *img)
 	}
 	if (iter == 100)
 		return (0x0000000);
+	else if (iter == 0)
+		return (ft_colors(img));
 	else
 		return (ft_colors(img) * 100 / iter);
 }

@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:19:58 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/23 18:43:51 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/25 02:16:44 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 #define S 1
 #define WIDTH 600
 #define HEIGHT 600
+#define LEFT 123
+#define RIGHT 124
+#define DOWN 125
+#define UP 126
 
 typedef struct	s_data {
 	void	*img;
@@ -38,12 +42,16 @@ typedef struct	s_data {
 	float	cr;
 	float	ci;
 	int		move;
+	double i_max;
+	double i_min;
+	double r_max;
+	double r_min;
 }				t_data;
 
 void julia(t_data *img);
 int ft_exit(t_data *mlxt);
 void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
-float to_complexe(int a);
+double	to_complexe(int pnt, int window, double max, double min);
 int ft_colors(t_data *img);
 int ft_map_jl(int x, int y, t_data *img);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -59,5 +67,6 @@ int iteration_tricorn(float reel, float imag, t_data *img);
 void tricorn(t_data *img);
 void    defin_sets(t_data *img, char **av, int ac);
 int	ft_atoi_sign(char c, int *i);
+int ft_arrows_keys(int key, t_data *img);
 
 #endif

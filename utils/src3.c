@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:03:41 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/23 18:40:33 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/25 20:45:21 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int iteration_tricorn(float reel, float imag, t_data *img)
     }
     if (iter  == 100)
         return(0x0000000);
+    else if (iter == 0)
+		return (ft_colors(img));
     else
         return(ft_colors(img) * 100/iter);
 }
