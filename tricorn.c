@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:43:31 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 02:39:31 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/26 05:55:43 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	tricorn(t_data *img)
 		{
 			reel = to_complexe(i, WIDTH, img->r_max, img->r_min);
 			imag = to_complexe(j, HEIGHT, img->i_max, img->i_min);
-			color = iteration_julia(reel, imag, img);
+			color = iteration_tricorn(reel, imag, img);
 			my_mlx_pixel_put(img, i, j, color);
 			j++;
 		}
