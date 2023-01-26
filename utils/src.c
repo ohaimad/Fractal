@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src2.c                                             :+:      :+:    :+:   */
+/*   src.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:32:09 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/25 20:38:25 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/26 02:24:39 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	ft_switch(char *str)
 	mand = "mandelbrot";
 	jul = "julia";
 	tricorn = "tricorn";
-	if (ft_strncmp(str, mand, ft_strlen(str)) == 0)
+	if (ft_strncmp(str, mand, ft_strlen(mand) + 1) == 0)
 		return (20);
-	else if (ft_strncmp(str, jul, ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, jul, ft_strlen(jul) + 1) == 0)
 		return (10);
-	else if (ft_strncmp(str, tricorn, ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, tricorn, ft_strlen(tricorn) + 1) == 0)
 		return (30);
 	else
 	{
@@ -38,18 +38,29 @@ int	ft_switch(char *str)
 	return (0);
 }
 
-void	ft_init(t_data *img)
+int	ft_arrows_keys(int key, t_data *img)
 {
-	img->mlx = mlx_init();
-	img->mlx_win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "Window");
-	img->img = mlx_new_image(img->mlx, WIDTH, HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
-	img->coloring = 0;
-	img->r_max = 2;
-    img->r_min = -2;
-    img->i_max = 2;
-    img->i_min = -2;
+	if (key == RIGHT)
+	{
+		img->r_min -= 0.5;
+		img->r_max -= 0.5;
+	}
+	else if (key == LEFT)
+	{
+		img->r_max += 0.5;
+		img->r_min += 0.5;
+	}
+	else if (key == DOWN)
+	{
+		img->i_min -= 0.5;
+		img->i_max -= 0.5;
+	}
+	else if (key == UP)
+	{
+		img->i_max += 0.5;
+		img->i_min += 0.5;
+	}
+	return (0);
 }
 
 int	key_shift(int key, t_data *shifting)
@@ -79,37 +90,10 @@ int	key_shift(int key, t_data *shifting)
 
 double	to_complexe(int pnt, int window, double max, double min)
 {
-		double x;
-		double res;
+	double	x;
+	double	res;
 
-		x = (max - min) / window;
-		res = min + (x * pnt);
-		return (res);
-}
-
-int	iteration_mandelbrot(float reel, float imag, t_data *img)
-{
-	int		iter;
-	float	r;
-	float	i;
-	float	cr;
-	float	ci;
-
-	cr = reel;
-	ci = imag;
-	iter = 0;
-	while ((reel * reel + imag * imag) < 16 && iter < 100)
-	{
-		r = reel;
-		i = imag;
-		reel = r * r - i * i + cr;
-		imag = 2 * r * i + ci;
-		iter++;
-	}
-	if (iter == 100)
-		return (0x0000000);
-	else if (iter == 0)
-		return (ft_colors(img));
-	else
-		return (ft_colors(img) * 100 / iter);
+	x = (max - min) / window;
+	res = min + (x * pnt);
+	return (res);
 }

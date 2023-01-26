@@ -2,7 +2,7 @@ NAME = fractol
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = mandelbrot.c julia.c tricorn.c main.c utils/src1.c utils/src2.c utils/src3.c utils/src4.c \
+SRCS = mandelbrot.c julia.c tricorn.c main.c utils/iterations.c utils/src.c utils/libft.c utils/events.c \
 
 OBJS = $(SRCS:.c=.o)
 

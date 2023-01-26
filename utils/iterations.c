@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src1.c                                             :+:      :+:    :+:   */
+/*   iterations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:27:39 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/25 20:29:03 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/26 02:19:16 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
-
-int	ft_exit(t_data *mlxt)
-{
-	mlx_destroy_image(mlxt->mlx, mlxt->img);
-	mlx_destroy_window(mlxt->mlx, mlxt->mlx_win);
-	exit(0);
-}
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
 
 int	iteration_julia(float reel, float imag, t_data *img)
 {
@@ -61,17 +46,56 @@ int	ft_map_jl(int x, int y, t_data *img)
 	return (0);
 }
 
-int	ft_colors(t_data *img)
+int	iteration_tricorn(float reel, float imag, t_data *img)
 {
-	int	color;
+	int		iter;
+	float	r;
+	float	i;
+	float	cr;
+	float	ci;
 
-	if (img->coloring == 0)
-		color = 0x00FFF000;
-	if (img->coloring == 1)
-		color = 0x000f0000;
-	if (img->coloring == 2)
-		color = 0x0000A170;
-	if (img->coloring == 3)
-		color = 0x000FFFF0;
-	return (color);
+	cr = reel;
+	ci = imag;
+	iter = 0;
+	while ((reel * reel + imag * imag) < 16 && iter < 100)
+	{
+		r = reel;
+		i = imag;
+		reel = r * r - i * i + cr;
+		imag = -2 * r * i + ci;
+		iter++;
+	}
+	if (iter == 100)
+		return (0x0000000);
+	else if (iter == 0)
+		return (ft_colors(img));
+	else
+		return (ft_colors(img) * 100 / iter);
+}
+
+int	iteration_mandelbrot(float reel, float imag, t_data *img)
+{
+	int		iter;
+	float	r;
+	float	i;
+	float	cr;
+	float	ci;
+
+	cr = reel;
+	ci = imag;
+	iter = 0;
+	while ((reel * reel + imag * imag) < 16 && iter < 100)
+	{
+		r = reel;
+		i = imag;
+		reel = r * r - i * i + cr;
+		imag = 2 * r * i + ci;
+		iter++;
+	}
+	if (iter == 100)
+		return (0x0000000);
+	else if (iter == 0)
+		return (ft_colors(img));
+	else
+		return (ft_colors(img) * 100 / iter);
 }
