@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:32:09 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 02:24:39 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/26 19:31:59 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,19 @@ double	to_complexe(int pnt, int window, double max, double min)
 	x = (max - min) / window;
 	res = min + (x * pnt);
 	return (res);
+}
+
+int	ft_colors(t_data *img)
+{
+	int	color;
+
+	if (img->coloring == 0)
+		color = 0x00FFF000;
+	if (img->coloring == 1)
+		color = 0x000f0000;
+	if (img->coloring == 2)
+		color = 0x0000A170;
+	if (img->coloring == 3)
+		color = 0x000FFFF0;
+	return (color);
 }
