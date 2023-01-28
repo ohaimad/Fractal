@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:45:00 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 00:12:08 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/27 22:59:24 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	ft_init(t_data *img)
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	img->coloring = 0;
-	img->r_max = 2;
-	img->r_min = -2;
-	img->i_max = 2;
-	img->i_min = -2;
+	ft_max_min(img);
 }
 
 int	ft_exit(t_data *mlxt)
@@ -39,4 +36,14 @@ int	ft_exit(t_data *mlxt)
 	mlx_destroy_image(mlxt->mlx, mlxt->img);
 	mlx_destroy_window(mlxt->mlx, mlxt->mlx_win);
 	exit(0);
+}
+
+double	to_complexe(int pnt, int window, double max, double min)
+{
+	double	x;
+	double	res;
+
+	x = (max - min) / window;
+	res = min + (x * pnt);
+	return (res);
 }

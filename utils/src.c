@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:32:09 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 19:31:59 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/27 22:59:43 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,53 @@ int	ft_switch(char *str)
 
 int	ft_arrows_keys(int key, t_data *img)
 {
-	if (key == RIGHT)
-	{
-		img->r_min -= 0.5;
-		img->r_max -= 0.5;
-	}
-	else if (key == LEFT)
+	if (key == LEFT)
 	{
 		img->r_max += 0.5;
 		img->r_min += 0.5;
 	}
-	else if (key == DOWN)
+	else if (key == RIGHT)
 	{
-		img->i_min -= 0.5;
-		img->i_max -= 0.5;
+		img->r_min -= 0.5;
+		img->r_max -= 0.5;
 	}
 	else if (key == UP)
 	{
 		img->i_max += 0.5;
 		img->i_min += 0.5;
 	}
+	else if (key == DOWN)
+	{
+		img->i_min -= 0.5;
+		img->i_max -= 0.5;
+	}
+	return (0);
+}
+
+int	ft_mouse_zoom(int key, int x, int y, t_data *img)
+{
+	(void)x;
+	(void)y;
+	if (key == ZOOM_IN)
+	{
+		img->r_min *= 0.5;
+		img->r_max *= 0.5;
+		img->i_min *= 0.5;
+		img->i_max *= 0.5;
+	}
+	else if (key == ZOOM_OUT)
+	{
+		img->r_max /= 0.5;
+		img->r_min /= 0.5;
+		img->i_min /= 0.5;
+		img->i_max /= 0.5;
+	}
+	if (img->status == 10)
+		julia(img);
+	else if (img->status == 20)
+		mandelbrot(img);
+	else if (img->status == 30)
+		tricorn(img);
 	return (0);
 }
 
@@ -86,16 +113,6 @@ int	key_shift(int key, t_data *shifting)
 	else if (shifting->status == 30)
 		tricorn(shifting);
 	return (0);
-}
-
-double	to_complexe(int pnt, int window, double max, double min)
-{
-	double	x;
-	double	res;
-
-	x = (max - min) / window;
-	res = min + (x * pnt);
-	return (res);
 }
 
 int	ft_colors(t_data *img)

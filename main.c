@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:11:10 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 19:41:22 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/27 20:22:15 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char **av)
 	mlx_hook(img.mlx_win, 17, 0, ft_exit, &img);
 	mlx_hook(img.mlx_win, 6, 0, ft_map_jl, &img);
 	mlx_key_hook(img.mlx_win, key_shift, &img);
+	mlx_mouse_hook(img.mlx_win, ft_mouse_zoom, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }
