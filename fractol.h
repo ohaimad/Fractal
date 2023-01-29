@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 12:19:58 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/27 20:36:36 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:47:44 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define SPACE 49
 # define ESP 53
 # define S 1
-# define WIDTH 700
-# define HEIGHT 700
+# define WIDTH 500
+# define HEIGHT 500
 # define LEFT 123
 # define RIGHT 124
 # define DOWN 125
@@ -42,11 +42,15 @@ typedef struct s_data {
 	int		status;
 	float	cr;
 	float	ci;
+	float	xx;
+	float	yy;
 	int		move;
 	double	i_max;
 	double	i_min;
 	double	r_max;
 	double	r_min;
+	int		x;
+	int		y;
 }				t_data;
 
 void	julia(t_data *img);
@@ -68,7 +72,8 @@ int		iteration_tricorn(float reel, float imag, t_data *img);
 void	tricorn(t_data *img);
 void	defin_sets(t_data *img, char **av, int ac);
 int		ft_atoi_sign(char c, int *i);
-int		ft_arrows_keys(int key, t_data *img);
+void	ft_arrows_keys(int key, t_data *img);
 void	ft_max_min(t_data *img);
 int		ft_mouse_zoom(int key, int x, int y, t_data *img);
+int		zoom(t_data *img, int key, int x, int y);
 #endif

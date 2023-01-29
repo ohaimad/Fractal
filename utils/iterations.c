@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:27:39 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/27 16:53:47 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:40:41 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	iteration_julia(float reel, float imag, t_data *img)
 	float	i;
 
 	iter = 0;
-	while ((reel * reel + imag * imag) < 16 && iter < 100)
+	while ((reel * reel + imag * imag) < 4 && iter < 100)
 	{
 		r = reel;
 		i = imag;
@@ -32,11 +32,13 @@ int	iteration_julia(float reel, float imag, t_data *img)
 	else if (iter == 0)
 		return (ft_colors(img));
 	else
-		return (ft_colors(img) * 100 / iter);
+		return (ft_colors(img) * 100 >> iter);
 }
 
 int	ft_map_jl(int x, int y, t_data *img)
 {
+	img->yy = y;
+	img->xx = x;
 	if (img->move == 1 && x >= 0 && x <= WIDTH && y >= 0 && y <= HEIGHT)
 	{
 		img->cr = to_complexe(x, WIDTH, img->r_max, img->r_min);
@@ -57,7 +59,7 @@ int	iteration_tricorn(float reel, float imag, t_data *img)
 	cr = reel;
 	ci = imag;
 	iter = 0;
-	while ((reel * reel + imag * imag) < 16 && iter < 100)
+	while ((reel * reel + imag * imag) < 4 && iter < 100)
 	{
 		r = reel;
 		i = imag;
@@ -70,7 +72,7 @@ int	iteration_tricorn(float reel, float imag, t_data *img)
 	else if (iter == 0)
 		return (ft_colors(img));
 	else
-		return (ft_colors(img) * 100 / iter);
+		return (ft_colors(img) * 100 >> iter);
 }
 
 int	iteration_mandelbrot(float reel, float imag, t_data *img)
@@ -84,7 +86,7 @@ int	iteration_mandelbrot(float reel, float imag, t_data *img)
 	cr = reel;
 	ci = imag;
 	iter = 0;
-	while ((reel * reel + imag * imag) < 4 && iter < 100)
+	while ((reel * reel + imag * imag) < 4 && iter < 50)
 	{
 		r = reel;
 		i = imag;
@@ -92,10 +94,10 @@ int	iteration_mandelbrot(float reel, float imag, t_data *img)
 		imag = 2 * r * i + ci;
 		iter++;
 	}
-	if (iter == 100)
+	if (iter == 50)
 		return (0x0000000);
 	else if (iter == 0)
 		return (ft_colors(img));
 	else
-		return (ft_colors(img) * 100 / iter);
+		return (ft_colors(img) * 50 >> iter);
 }
