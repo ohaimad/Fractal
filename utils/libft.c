@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:03:41 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/26 19:20:28 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/30 08:54:54 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_atoi(char *str)
 		if (res > 100)
 			return (write(1, "the [0-100] range only", 22), exit(1), 1);
 	}
-	if ((res == 100 && str[i] == '.'))
+	if (str[i] == '.')
 		return (write(1, "the [0-100] range only", 22), exit(1), 1);
 	else if ((str[i] >= 65 && str[i] <= 90) || (str[i] >= 97 && str[i] <= 122))
 		return (write(1, "alphabet are not allowed", 24), exit(1), 1);
