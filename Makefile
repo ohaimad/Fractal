@@ -14,7 +14,7 @@ CC = cc
 
 MLK = -Wall -Wextra -Werror -Imlx -c $< -o
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(NAME)
 	$(CC) $(OBJS)  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c

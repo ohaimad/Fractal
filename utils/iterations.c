@@ -6,7 +6,7 @@
 /*   By: ohaimad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 01:27:39 by ohaimad           #+#    #+#             */
-/*   Updated: 2023/01/29 16:56:26 by ohaimad          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:12:38 by ohaimad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	iteration_mandelbrot(float reel, float imag, t_data *img)
 	cr = reel;
 	ci = imag;
 	iter = 0;
-	while ((reel * reel + imag * imag) < 4 && iter < 50)
+	while ((reel * reel + imag * imag) < 4 && iter < 100)
 	{
 		r = reel;
 		i = imag;
@@ -94,10 +94,10 @@ int	iteration_mandelbrot(float reel, float imag, t_data *img)
 		imag = 2 * r * i + ci;
 		iter++;
 	}
-	if (iter == 50)
+	if (iter == 100)
 		return (0x0000000);
 	else if (iter == 0)
 		return (ft_colors(img));
 	else
-		return (ft_colors(img) * 50 >> iter);
+		return (ft_colors(img) * 100 >> iter);
 }
